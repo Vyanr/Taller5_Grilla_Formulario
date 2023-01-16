@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JSON data to HTML table</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.js"
+    />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/styles/grilla.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="table-responsive">
+        <h1>Grilla con filtro, accediendo por medio de ajax al JSON</h1>
+
+        <input type="text" id="myInput" placeholder="search..." />
+        <br />
+        <table
+          class="table table-bordered table-striped"
+          id="employee_table"
+          style="border: 1px solid"
+        >
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>geo</th>
+              <th>phone</th>
+              <th>website</th>
+              <th>company</th>
+            </tr>
+          </thead>
+
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  $(document).ready(function () {
+    $.getJSON("https://jsonplaceholder.typicode.com/users", function (data) {
+      var employee_data = "";
+      $.each(data, function (key, value) {
+        employee_data += `<tbody id="#employee_table ">;`;
+        employee_data += "<tr>";
+        employee_data += "<td>" + value.name + "</td>";
+        employee_data += "<td>" + value.username + "</td>";
+        employee_data += "<td>" + value.email + "</td>";
+        employee_data += `<td>Street: ${value.address.street},
+           Suite: ${value.address.suite}, City: ${value.address.city}, Zipcode: ${value.address.zipcode}</td>`;
+        employee_data += `<td>  ${value.address.geo.lat}
+          ${value.address.geo.lng}
+            </td>`;
+        employee_data += "<td>" + value.phone + "</td>";
+        employee_data += "<td>" + value.website + "</td>";
+        employee_data += `<td> ${value.company.name}
+            </td>`;
+
+        employee_data += "<tr>";
+        employee_data += "</tbody>";
+      });
+      $("#employee_table").append(employee_data);
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function () {
+    $("#myInput").on("keyup", function () {
+      var value = $(this).val().toLowerCase();
+      $("#employee_table tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+      });
+    });
+  });
+</script>

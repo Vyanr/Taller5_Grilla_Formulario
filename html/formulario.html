@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/formulario.css" />
+  </head>
+  <body>
+    <div class="form-container">
+      <form action="" id="formulario">
+        <label for="name">Nombres</label>
+        <input type="text" id="name" />
+
+        <label for="lastName">Apellidos</label>
+        <input type="text" id="lastName" />
+
+        <label for="fechaNacimiento">Fecha de nacimiento</label>
+        <input type="date" id="fechaNacimiento" />
+
+        <label for="eedad">Edad</label>
+        <input type="text" id="eedad" />
+
+        <label for="correo">Correo</label>
+        <input type="email" id="correo" />
+
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" />
+
+        <label for="enfermedades">Enfermedades contagiosas</label>
+
+        <select name="Accion" id="enfermedades" onchange="respuesta();">
+          <option value="si">si</option>
+          <option value="no">no</option>
+          <option value="seleccionar" selected>seleccionar</option>
+        </select>
+
+        <textarea
+          name="contagiora"
+          id="escribirenfer"
+          cols="30"
+          rows="10"
+        ></textarea>
+
+        <button>Enviar</button>
+      </form>
+    </div>
+
+    <script src="/scripts/formulario.js"></script>
+  </body>
+</html>
